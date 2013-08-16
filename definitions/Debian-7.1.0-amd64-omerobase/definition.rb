@@ -46,8 +46,9 @@ Veewee::Definition.declare({
     #"puppet.sh",
     #"chef.sh",
     "cleanup-virtualbox.sh",
-    "omero_user.sh",
     "cleanup.sh",
+    "omero_user.sh",
+    "omero_deps.sh",
     #"zerodisk.sh"
   ],
   :postinstall_timeout => "10000"
