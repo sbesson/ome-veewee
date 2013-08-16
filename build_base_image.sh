@@ -20,12 +20,25 @@ BASEBOX=$1
 BUILD_NUMBER=${BUILD_NUMBER:-DEV}
 KEEP_VM=0
 
+# Setup the Ruby environment
 . ~/.rvm/scripts/rvm
 rvm use 1.9.2
+# Install Ruby Gem dependencies if not already present
 bundle install
 
+# Build the box
 bundle exec veewee vbox build --force "$BASEBOX" --nogui
 bundle exec veewee vbox halt "$BASEBOX"
+
+# At this point there should be a new VirtualBox machine in the VirtualBox
+# directory, for example under
+# `~/VirtualBox VMs/Debian-7.1.0-amd64-omerobase/`.
+#
+# If you want to keep the base VM then clone the VDI to another directory,
+# do not just copy the VDI since it contains a UUID registered to the base
+# image VM.  Note the VDI will remain registered to VirtualBox as a hard disk.
+#
+# Alternatively copy the VDI and delete the original VM
 
 SOURCE="$VBOXVMS/${BASE_DEFINITION}/${BASE_DEFINITION}.vdi"
 DEST="$PWD/${BASE_DEFINITION}-b${BUILD_NUMBER}.vdi"
