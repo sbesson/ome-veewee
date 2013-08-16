@@ -24,7 +24,7 @@ KEEP_VM=0
 rvm use 1.9.2
 bundle install
 
-bundle exec veewee vbox build --force "$BASEBOX"
+bundle exec veewee vbox build --force "$BASEBOX" --nogui
 bundle exec veewee vbox halt "$BASEBOX"
 
 SOURCE="$VBOXVMS/${BASE_DEFINITION}/${BASE_DEFINITION}.vdi"
