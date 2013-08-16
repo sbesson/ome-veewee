@@ -17,7 +17,7 @@ else
 fi
 
 BASEBOX=$1
-BUILD_NUMBER={BUILD_NUMBER:-DEV}
+BUILD_NUMBER=${BUILD_NUMBER:-DEV}
 KEEP_VM=0
 
 . ~/.rvm/scripts/rvm
@@ -28,7 +28,7 @@ bundle exec veewee vbox build --force "$BASEBOX" --nogui
 bundle exec veewee vbox halt "$BASEBOX"
 
 SOURCE="$VBOXVMS/${BASE_DEFINITION}/${BASE_DEFINITION}.vdi"
-DEST="$PWD/${BASE_DEFINITION}-b{$BUILD_NUMBER}.vdi"
+DEST="$PWD/${BASE_DEFINITION}-b${BUILD_NUMBER}.vdi"
 
 if [ $KEEP_VM -eq 0 ]; then
 	cp "$SOURCE" "$DEST"
