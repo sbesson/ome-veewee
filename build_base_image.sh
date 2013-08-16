@@ -9,12 +9,10 @@ if [ $# -ne 1 ]; then
 	exit 1
 fi
 
-if [ -d "$HOME/Library/VirtualBox" ]; then
-	HARDDISKS=${HARDDISKS:-"$HOME/Library/VirtualBox/HardDisks/"}
-elif [ -e "$HOME/.VirtualBox" ]; then
-	export HARDDISKS=${HARDDISKS:-"$HOME/.VirtualBox/HardDisks/"}
+if [ -d "$HOME/VirtualBox VMs/" ]; then
+	VBOXVMS="$HOME/VirtualBox VMs/"
 else
-	echo "Cannot find harddisks! Trying setting HARDDISKS"
+	echo "Cannot find VirtualBox VMs directory"
 	exit 2
 fi
 
@@ -26,6 +24,18 @@ KEEP_VM=0
 rvm use 1.9.2
 bundle install
 
-bundle exec veewee vbox build "$BASEBOX"
+bundle exec veewee vbox build --force "$BASEBOX"
 bundle exec veewee vbox halt "$BASEBOX"
+
+SOURCE="$VBOXVMS/${BASE_DEFINITION}/${BASE_DEFINITION}.vdi"
+DEST="$PWD/${BASE_DEFINITION}-b{$BUILD_NUMBER}.vdi"
+
+if [ $KEEP_VM -eq 0 ]; then
+	cp "$SOURCE" "$DEST"
+	bundle exec veewee vbox destroy "$BASEBOX"
+else
+	VBoxManage clonehd "$SOURCE" "$DEST"
+fi
+
+echo "Base image: $DEST"
 
