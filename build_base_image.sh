@@ -40,8 +40,8 @@ bundle exec veewee vbox halt "$BASEBOX"
 #
 # Alternatively copy the VDI and delete the original VM
 
-SOURCE="$VBOXVMS/${BASE_DEFINITION}/${BASE_DEFINITION}.vdi"
-DEST="$PWD/${BASE_DEFINITION}-b${BUILD_NUMBER}.vdi"
+SOURCE="$VBOXVMS/${BASEBOX}/${BASEBOX}.vdi"
+DEST="$PWD/${BASEBOX}-b${BUILD_NUMBER}.vdi"
 
 if [ $KEEP_VM -eq 0 ]; then
 	cp "$SOURCE" "$DEST"
