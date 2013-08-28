@@ -1,0 +1,3 @@
+[submodule "definitions/CentOS-6.4-x86_64-omerodevbase/ome-sysadmin-scripts"]
+	path = definitions/CentOS-6.4-x86_64-omerodevbase/ome-sysadmin-scripts
+	url = https://github.com/manics/ome-sysadmin-scripts.git
