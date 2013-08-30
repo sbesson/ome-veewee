@@ -45,6 +45,9 @@ DEST="$PWD/${BASEBOX}-b${BUILD_NUMBER}.vdi"
 
 if [ $KEEP_VM -eq 0 ]; then
 	cp "$SOURCE" "$DEST"
+        # Sometimes complains about the VM being locked... add in a delay to
+        # see if it helps
+        sleep 30
 	bundle exec veewee vbox destroy "$BASEBOX"
 else
 	VBoxManage clonehd "$SOURCE" "$DEST"
