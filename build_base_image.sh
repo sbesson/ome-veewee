@@ -1,5 +1,5 @@
 #!/bin/bash
-# Build the OMERo base VirtualBox image using Veewee.
+# Build the OMERO base VirtualBox image using Veewee.
 # Example: ./build_base_image.sh Debian-7.1.0-amd64-omerobase
 
 set -e -x
@@ -19,6 +19,28 @@ fi
 BASEBOX=$1
 BUILD_NUMBER=${BUILD_NUMBER:-DEV}
 KEEP_VM=0
+
+# Veewee/VirtualBox sometimes exits before releasing the underlying files
+# which can cause locking issues or file corruption. This is an attempt to
+# work around it.
+wait_for_vbox()
+{
+    if [ ! -f "$1" ]; then
+        echo "ERROR: Invalid file"
+        exit 2
+    fi
+    RET=0
+    set +e
+    echo -n "Waiting for VBox to release file "
+    while [ $RET -eq 0 ]; do
+        echo -n .
+        sleep 5
+        lsof -Fc "$1" |grep VBoxHeadless
+        RET=$?
+    done
+    echo
+    set -e
+}
 
 # Setup the Ruby environment
 . ~/.rvm/scripts/rvm
@@ -43,11 +65,10 @@ bundle exec veewee vbox halt "$BASEBOX"
 SOURCE="$VBOXVMS/${BASEBOX}/${BASEBOX}.vdi"
 DEST="$PWD/${BASEBOX}-b${BUILD_NUMBER}.vdi"
 
+wait_for_vbox "$SOURCE"
+
 if [ $KEEP_VM -eq 0 ]; then
 	cp "$SOURCE" "$DEST"
-        # Sometimes complains about the VM being locked... add in a delay to
-        # see if it helps
-        sleep 30
 	bundle exec veewee vbox destroy "$BASEBOX"
 else
 	VBoxManage clonehd "$SOURCE" "$DEST"
