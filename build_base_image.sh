@@ -20,6 +20,10 @@ BASEBOX=$1
 BUILD_NUMBER=${BUILD_NUMBER:-DEV}
 KEEP_VM=0
 
+# /usr/sbin may not be in PATH, so specify full path to lsof
+LSOF=${LSOF:-/usr/sbin/lsof}
+
+
 # Veewee/VirtualBox sometimes exits before releasing the underlying files
 # which can cause locking issues or file corruption. This is an attempt to
 # work around it.
@@ -29,13 +33,19 @@ wait_for_vbox()
         echo "ERROR: Invalid file"
         exit 2
     fi
+
+    if [ ! -x "$LSOF" ]; then
+        echo "ERROR: Unable to find lsof"
+        exit 2
+    fi
+
     RET=0
     set +e
     echo -n "Waiting for VBox to release file "
     while [ $RET -eq 0 ]; do
         echo -n .
         sleep 5
-        lsof -Fc "$1" |grep VBoxHeadless
+        "$LSOF" -Fc "$1" |grep VBoxHeadless
         RET=$?
     done
     echo
