@@ -32,8 +32,9 @@ Veewee::Session.declare({
     "virtualbox.sh",
     #"vmfusion.sh",
     "cleanup.sh",
-    "omero_user.sh",
+    "omero-user.sh",
     "ome-sysadmin-scripts/installation/centos-omero.bash",
+    "omero-iptables.sh",
     #"zerodisk.sh"
   ],
   :postinstall_timeout => 10000
