@@ -72,7 +72,8 @@ bundle exec veewee vbox halt "$BASEBOX"
 #
 # Alternatively copy the VDI and delete the original VM
 
-SOURCE="$VBOXVMS/${BASEBOX}/${BASEBOX}.vdi"
+# VBox may append a number to the disk image name
+SOURCE=$(ls "$VBOXVMS/${BASEBOX}/${BASEBOX}"*.vdi)
 DEST="$PWD/${BASEBOX}-b${BUILD_NUMBER}.vdi"
 
 wait_for_vbox "$SOURCE"
