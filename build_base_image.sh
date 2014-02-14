@@ -53,10 +53,7 @@ wait_for_vbox()
 }
 
 # Setup the Ruby environment
-. ~/.rvm/scripts/rvm
-rvm use 1.9.2
-# Install Ruby Gem dependencies if not already present
-bundle install
+. setup.env
 
 # Build the box
 bundle exec veewee vbox build --force "$BASEBOX" --nogui
