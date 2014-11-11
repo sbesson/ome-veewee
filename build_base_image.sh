@@ -54,7 +54,7 @@ wait_for_vbox()
 
 # Setup the Ruby environment
 . ~/.rvm/scripts/rvm
-rvm use 1.9.2
+rvm use 1.9.3
 # Install Ruby Gem dependencies if not already present
 bundle install
 
