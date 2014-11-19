@@ -5,9 +5,9 @@ Veewee::Definition.declare({
   :memory_size=> '2048',
   :disk_size => '32768', :disk_format => 'VDI', :hostiocache => 'off',
   :os_type_id => 'Debian_64',
-  :iso_file => "debian-7.6.0-amd64-netinst.iso",
-  :iso_src => "http://cdimage.debian.org/debian-cd/7.6.0/amd64/iso-cd/debian-7.6.0-amd64-netinst.iso",
-  :iso_md5 => "8a3c2ad7fd7a9c4c7e9bcb5cae38c135",
+  :iso_file => "debian-7.7.0-amd64-netinst.iso",
+  :iso_src => "http://cdimage.debian.org/debian-cd/7.7.0/amd64/iso-cd/debian-7.7.0-amd64-netinst.iso",
+  :iso_md5 => "0b31bccccb048d20b551f70830bb7ad0",
   :iso_download_timeout => "1000",
   :boot_wait => "10", :boot_cmd_sequence => [
      '<Esc>',
@@ -27,7 +27,7 @@ Veewee::Definition.declare({
      '<Enter>'
   ],
   :kickstart_port => "7122",
-  :kickstart_timeout => "10000",
+  :kickstart_timeout => "300",
   :kickstart_file => "preseed.cfg",
   :ssh_login_timeout => "10000",
   :ssh_user => "vagrant",
