@@ -1,6 +1,6 @@
 #!/bin/bash
 # Build the OMERO base VirtualBox image using Veewee.
-# Example: ./build_base_image.sh Debian-7.6.0-amd64-omerobase
+# Example: ./build_base_image.sh Debian-7.7.0-amd64-omerobase
 
 set -e -x
 
