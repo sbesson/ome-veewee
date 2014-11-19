@@ -1,8 +1,8 @@
 # Update the box
 export DEBIAN_FRONTEND=noninteractive
 apt-get -y update
-# Upgrade to pick up security fixes (especially bash)
-apt-get -y upgrade
+# Upgrade to pick up security fixes (disabled due to wget prompt)
+#apt-get -y upgrade
 apt-get -y install linux-headers-$(uname -r) build-essential
 apt-get -y install zlib1g-dev libssl-dev libreadline-gplv2-dev
 apt-get -y install curl unzip
