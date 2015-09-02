@@ -1,0 +1,6 @@
+language: ruby
+sudo: false
+cache: bundler
+rvm: 1.9.3
+install: bundle install
+script: ./build_base_image.sh ubuntu-14.04-amd64-omerobase
