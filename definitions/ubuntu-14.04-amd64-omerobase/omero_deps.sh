@@ -15,5 +15,8 @@ apt-get -y install \
     postgresql \
     nginx \
 
+# OMERO Python requirements that are newer than distro versions
+pip install django
+
 # Remove downloaded packages
 apt-get -y clean
