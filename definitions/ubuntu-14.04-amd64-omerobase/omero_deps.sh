@@ -14,9 +14,10 @@ apt-get -y install \
     ice-services python-zeroc-ice \
     postgresql \
     nginx \
+    gunicorn \
 
 # OMERO Python requirements that are newer than distro versions
-pip install django
+pip install "Django>=1.8,<1.9"
 
 # Remove downloaded packages
 apt-get -y clean
